@@ -25,12 +25,12 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 /**
- *  `UIImageView+AFNetworking_UIActivityIndicatorView` adds `usingActivityIndicatorStyle:` methods to AFNetworking to show an animated activity indicator view while an image view's image is loading.
+ *  `UIImageView+AFNetworking_UIActivityIndicatorView` adds `usingActivityIndicatorStyle:` methods to AFNetworking to show an animated activity indicator view while the image view's image is loading.
  */
 @interface UIImageView (AFNetworking_UIActivityIndicatorView)
 
 /**
- *  This is the activity indicator view associated with the image view
+ *  This is the activity indicator view associated with the image view.
  *
  *  @return The activity indicator view (if set) or `nil`
  */

@@ -67,3 +67,7 @@ If you're not familar with appledoc, check out Mattt Thompson's (<a href="https:
 5) Submit a pull request, referencing your original issue from (1) above.
 
 6) Last but not least, sit back and enjoy your awesomeness in helping make your fellow developers' lives a bit easier!
+
+## LICENSE
+
+Like `AFNetworking`, `AFNetworking+ImageActivityIndicator` is released under the MIT License. See the `LICENSE` file for more details.

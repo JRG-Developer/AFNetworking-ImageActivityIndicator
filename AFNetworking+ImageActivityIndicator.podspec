@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios
   s.ios.deployment_target = "6.0"
   s.name         = "AFNetworking+ImageActivityIndicator"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "AFNetworking+ImageActivityIndicator makes it easy to show an activity indicator while an image view's image is loading using AFNetworking."
   s.homepage     = "https://github.com/JRG-Developer/AFNetworking-ImageActivityIndicator"
   s.license      = { :type => "MIT", :file => "LICENSE" }

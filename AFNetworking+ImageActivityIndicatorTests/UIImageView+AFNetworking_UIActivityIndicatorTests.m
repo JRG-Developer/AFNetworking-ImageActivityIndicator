@@ -36,18 +36,22 @@
 
 #import <OCMock/OCMock.h>
 
+@interface UIImageView (PrivateMethods)
+- (void)af_addActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style;
+@end
+
 @interface UIImageView_AFNetworking_UIActivityIndicatorTests : XCTestCase
 @end
 
 @implementation UIImageView_AFNetworking_UIActivityIndicatorTests
 {
   Test_UIImageView *sut;
-  
-  id activityIndicatorMock;
-  id partialMock;
 
   NSURL *expectedURL;
   UIActivityIndicatorViewStyle style;
+  
+  id activityIndicatorMock;
+  id partialMock;
 }
 
 #pragma mark - Test Lifecycle
@@ -59,6 +63,13 @@
   
   expectedURL = [NSURL URLWithString:@"http://example.com"];
   style = UIActivityIndicatorViewStyleGray;
+}
+
+- (void)tearDown
+{
+  [activityIndicatorMock stopMocking];
+  [partialMock stopMocking];
+  [super tearDown];
 }
 
 #pragma mark - Given
@@ -164,15 +175,37 @@
   // given
   [self givenPartialMock];
   
+  NSURLRequest *request = [NSURLRequest requestWithURL:expectedURL];
+  OCMExpect([partialMock setImageWithURLRequest:request
+                              placeholderImage:nil
+                   usingActivityIndicatorStyle:style
+                                       success:nil
+                                       failure:nil]);
+  
   // when
   [partialMock setImageWithURL:expectedURL usingActivityIndicatorStyle:style];
   
   // then
-  [[partialMock verify] setImageWithURLRequest:[NSURLRequest requestWithURL:expectedURL]
-                              placeholderImage:nil
-                   usingActivityIndicatorStyle:style
-                                       success:nil
-                                       failure:nil];
+  OCMVerifyAll(partialMock);
+}
+
+- (void)testDoesNotShowActivityIndicatorIfURLRequestURLIsNil {
+  
+  // given
+  [self givenPartialMock];
+  NSURLRequest *request = [NSURLRequest requestWithURL:nil];
+  
+  [[[partialMock reject] ignoringNonObjectArgs] af_addActivityIndicatorWithStyle:0];
+  
+  // when
+  [sut setImageWithURLRequest:request
+             placeholderImage:nil
+  usingActivityIndicatorStyle:style
+                      success:nil
+                      failure:nil];
+  
+  // then
+  OCMVerifyAll(partialMock);
 }
 
 - (void)testAddsActivityIndicatorToView

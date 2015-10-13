@@ -170,6 +170,24 @@
 
 #pragma mark - Set Image With URL - Tests
 
+- (void)test___setImageWithURL_usingActivityIndicatorStyle___givenNilUrl_nils_imageViewImage
+{
+  // given
+  [self givenPartialMock];
+  OCMExpect([(UIImageView *)partialMock setImage:nil]);
+
+  [[partialMock reject] setImageWithURLRequest:OCMOCK_ANY
+                              placeholderImage:OCMOCK_ANY
+                                       success:OCMOCK_ANY
+                                       failure:OCMOCK_ANY];
+  
+  // when
+  [sut setImageWithURL:nil usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  
+  // then
+  OCMVerifyAll(partialMock);
+}
+
 - (void)test___setImageWithURL_usingActivityIndicatorStyle___callsMethodWithAdditionalParameters
 {
   // given
@@ -193,7 +211,7 @@
   
   // given
   [self givenPartialMock];
-  NSURLRequest *request = [NSURLRequest requestWithURL:nil];
+  NSURLRequest *request = [NSURLRequest new];
   
   [[[partialMock reject] ignoringNonObjectArgs] af_addActivityIndicatorWithStyle:0];
   

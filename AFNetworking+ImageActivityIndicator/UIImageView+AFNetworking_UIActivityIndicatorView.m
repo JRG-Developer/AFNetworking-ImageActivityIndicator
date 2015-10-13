@@ -77,9 +77,12 @@ static char AF_UIActivityIndicatorKey;
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-  if (urlRequest.URL != nil) {
-    [self af_addActivityIndicatorWithStyle:style];
+  if (urlRequest.URL == nil) {
+    self.image = nil;
+    return;
   }
+  
+  [self af_addActivityIndicatorWithStyle:style];
   
   __weak UIImageView *weakSelf = self;
   

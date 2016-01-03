@@ -1,28 +1,29 @@
 PODS:
-  - AFNetworking/NSURLConnection (2.6.0):
+  - AFNetworking (3.0.4):
+    - AFNetworking/NSURLSession (= 3.0.4)
+    - AFNetworking/Reachability (= 3.0.4)
+    - AFNetworking/Security (= 3.0.4)
+    - AFNetworking/Serialization (= 3.0.4)
+    - AFNetworking/UIKit (= 3.0.4)
+  - AFNetworking/NSURLSession (3.0.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.0):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.0)
-  - AFNetworking/Security (2.6.0)
-  - AFNetworking/Serialization (2.6.0)
-  - AFNetworking/UIKit (2.6.0):
-    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (3.0.4)
+  - AFNetworking/Security (3.0.4)
+  - AFNetworking/Serialization (3.0.4)
+  - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
   - Expecta (1.0.3)
   - OCMock (3.2)
 
 DEPENDENCIES:
-  - AFNetworking/UIKit (~> 2.0)
+  - AFNetworking
   - Expecta (~> 1.0)
   - OCMock (~> 3.0)
 
 SPEC CHECKSUMS:
-  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
   OCMock: 28def049ef47f996b515a8eeea958be7ccab2dbb
 

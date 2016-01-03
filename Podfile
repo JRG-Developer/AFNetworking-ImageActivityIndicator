@@ -1,6 +1,6 @@
-platform :ios, "7.0"
+platform :ios, "8.0"
 
-pod 'AFNetworking/UIKit', '~>2.0'
+pod 'AFNetworking'
 
 target "AFNetworking+ImageActivityIndicatorTests" do
   pod 'Expecta', '~> 1.0'

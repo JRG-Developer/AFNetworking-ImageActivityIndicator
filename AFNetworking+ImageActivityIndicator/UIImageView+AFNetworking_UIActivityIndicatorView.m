@@ -44,7 +44,7 @@ static char AF_UIActivityIndicatorKey;
 
 - (void)cancelImageRequestOperationAndRemoveActivityIndicatorView
 {
-  [self cancelImageRequestOperation];
+  [self cancelImageDownloadTask];
   [self removeActivityIndicatorView];
 }
 

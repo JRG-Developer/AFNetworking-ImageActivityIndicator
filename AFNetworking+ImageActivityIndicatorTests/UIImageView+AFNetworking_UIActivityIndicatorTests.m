@@ -152,7 +152,7 @@
   [partialMock cancelImageRequestOperationAndRemoveActivityIndicatorView];
   
   // then
-  [[partialMock verify] cancelImageRequestOperation];
+  [[partialMock verify] cancelImageDownloadTask];
 }
 
 - (void)test___cancelImageRequestOperationAndRemoveActivityIndicatorView___calls____removeActivityIndicatorViewView

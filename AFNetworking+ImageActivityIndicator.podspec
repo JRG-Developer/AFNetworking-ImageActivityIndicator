@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.framework    = "UIKit"
   s.requires_arc = true
 
-  s.dependency 'AFNetworking', '~> 2.0'
+  s.dependency 'AFNetworking', '~> 3.0'
   s.source_files = "AFNetworking+ImageActivityIndicator/*.{h,m}"
 end

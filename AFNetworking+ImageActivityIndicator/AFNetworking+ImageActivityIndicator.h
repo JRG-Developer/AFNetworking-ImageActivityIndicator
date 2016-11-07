@@ -27,4 +27,4 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <AFNetworking+ImageActivityIndicator/UIImageView+AFNetworking_UIActivityIndicatorView.h>
+#import <AFNetworking_ImageActivityIndicator/UIImageView+AFNetworking_UIActivityIndicatorView.h>

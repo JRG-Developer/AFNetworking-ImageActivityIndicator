@@ -65,24 +65,43 @@ static char AF_UIActivityIndicatorKey;
 - (void)setImageWithURL:(NSURL *)url usingActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style
 {
   [self setImageWithURLRequest:[NSURLRequest requestWithURL:url]
-              placeholderImage:nil
    usingActivityIndicatorStyle:style
+        activityIndicatorColor:nil
+              placeholderImage:nil
+                  failureImage:nil
                        success:nil
                        failure:nil];
 }
 
+- (void)setImageWithURL:(NSURL *)url
+ activityIndicatorStyle:(UIActivityIndicatorViewStyle)style
+ activityIndicatorColor:(UIColor *)color
+       placeholderImage:(UIImage *)placeholderImage
+           failureImage:(UIImage *)failureImage;
+{
+    [self setImageWithURLRequest:[NSURLRequest requestWithURL:url]
+     usingActivityIndicatorStyle:style
+          activityIndicatorColor:color
+                placeholderImage:placeholderImage
+                    failureImage:failureImage
+                         success:nil
+                         failure:nil];
+}
+
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest
-              placeholderImage:(UIImage *)placeholderImage
    usingActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style
+        activityIndicatorColor:(UIColor *)color
+              placeholderImage:(UIImage *)placeholderImage
+                  failureImage:(UIImage *)failureImage
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
   if (urlRequest.URL == nil) {
-    self.image = nil;
+    self.image = failureImage;
     return;
   }
   
-  [self af_addActivityIndicatorWithStyle:style];
+  [self af_addActivityIndicatorWithStyle:style color:color];
   
   __weak UIImageView *weakSelf = self;
   
@@ -108,6 +127,8 @@ static char AF_UIActivityIndicatorKey;
     
     if (failure) {
       failure(request, response, error);
+    } else {
+      strongSelf = failureImage;
     }
   }];
 }
@@ -115,12 +136,13 @@ static char AF_UIActivityIndicatorKey;
 #pragma mark - Private Helpers
 
 - (void)af_addActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style
+                                   color:(UIColor *)color
 {
   UIActivityIndicatorView *activityIndicator = [self activityIndicatorView];
   
   if (!activityIndicator) {
     
-    activityIndicator = [self af_createActivityIndicatorWithStyle:style];
+    activityIndicator = [self af_createActivityIndicatorWithStyle:style color:color];
     [self setActivityIndicatorView:activityIndicator];
     
     if ([NSThread isMainThread]) {
@@ -147,13 +169,18 @@ static char AF_UIActivityIndicatorKey;
 }
 
 - (UIActivityIndicatorView *)af_createActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style
+                                                           color:(UIColor *)color
 {
   UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:style];
   activityIndicator.userInteractionEnabled = NO;
   activityIndicator.center = self.center;
   activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin  | UIViewAutoresizingFlexibleBottomMargin |
   UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-  
+
+  if (color) {
+    activityIndicator.color = color;
+  }
+
   return activityIndicator;
 }
 
